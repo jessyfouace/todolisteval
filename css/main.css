@@ -96,22 +96,112 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+body{
+  word-wrap: break-word;
+}
+/**********/
+/* HEADER */
+/**********/
+.sizeimage{
+  width: 150px;
+}
+
+a{
+  color: black;
+  font-weight: bold;
+}
+a:hover{
+  color: #1d9cd7;
+  text-decoration: none;
+}
+
+header{
+  background-color: #f9f9fa;
+}
+
+/*********/
+/* INDEX */
+/*********/
+
+.borderindex{
+  border: 1px solid black;
+}
+
+.seemore{
+  height: 50px;
+  border: none;
+  border-left: 1px solid black;
+}
 
 
+@media screen and (max-width: 767px) {
+  .seemore{
+    height: 50px;
+    border: none;
+    border-top: 1px solid black;
+    width: 100%;
+    text-align: center;
+  }
+}
 
+.nocolor{
+  color: black;
+}
+.nocolor:hover{
+  color:black;
+}
 
+.backgroundgrey:hover{
+  background-color: #f9f9fa;
+}
 
+.bgcircle{
+  height: 80px;
+  width: 80px;
+  border: 1px solid black;
+  border-radius: 80px;
+}
 
+.textaddproject{
+  font-size: 36px;
+  padding-top: 12px;
+}
 
+.colorred {
+  color: red;
+}
 
+.colorgreen {
+  color: green;
+}
 
+.remove{
+  font-size: 20px;
+  background: inherit;
+  border: none;
+}
+.remove:hover{
+  cursor: pointer;
+}
 
+/****************/
+/* PROJECT VIEW */
+/****************/
 
+.titleprojectview{
+  border: 1px solid black;
+}
 
+.checkedprojectview{
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
 
-
-
-
+li{
+  list-style-type: none;
+  font-size: 20px;
+}
 
 /* ==========================================================================
    Helper classes
