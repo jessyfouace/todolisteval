@@ -97,6 +97,9 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+/**********/
+/* HEADER */
+/**********/
 .sizeimage{
   width: 150px;
 }
@@ -114,15 +117,61 @@ header{
   background-color: #f9f9fa;
 }
 
+/*********/
+/* INDEX */
+/*********/
+
+.borderindex{
+  border: 1px solid black;
+}
+
+.seemore{
+  height: 50px;
+  border: none;
+  border-left: 1px solid black;
+}
 
 
+@media screen and (max-width: 767px) {
+  .seemore{
+    height: 50px;
+    border: none;
+    border-top: 1px solid black;
+    width: 100%;
+    text-align: center;
+  }
+}
 
+.nocolor{
+  color: black;
+}
+.nocolor:hover{
+  color:black;
+}
 
+.backgroundgrey:hover{
+  background-color: #f9f9fa;
+}
 
+.bgcircle{
+  height: 80px;
+  width: 80px;
+  border: 1px solid black;
+  border-radius: 80px;
+}
 
+.textaddproject{
+  font-size: 36px;
+  padding-top: 12px;
+}
 
+.colorred {
+  color: red;
+}
 
-
+.colorgreen {
+  color: green;
+}
 /* ==========================================================================
    Helper classes
    ========================================================================== */
