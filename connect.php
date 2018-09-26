@@ -4,7 +4,7 @@ require('config.php'); ?>
 <html class="no-js" lang="fr">
 
 <head>
-  <title>Inscription/Connexion</title>
+  <title>Connexion</title>
   <meta charset="utf-8">
   <meta name="description" content="Site de Todolist gratuit et automatique avec système de compte. Todolist gratuit en ligne. Inscription. Connexion">
 <?php
@@ -12,7 +12,7 @@ require('doctype.php');
 require('header.php');
 ?>
 <!-- template take at https://bootsnipp.com/snippets/z8699  -->
-<?php if (empty($_SESSION['id'])) { ?>
+<?php if (empty($_SESSION['pseudo'])) { ?>
 <article class="card-body mx-auto" style="max-width: 400px;">
 	<h4 class="card-title mt-3 text-center">Connection</h4>
 	<p class="text-center">Toutes données restent confidentiels</p>
@@ -62,17 +62,17 @@ require('header.php');
               $create->execute  (array(
                 'takeid' => $value['id']
               ));
-              echo "<p class='text-center colorgreen'>Connection réussis</p>";
+              echo "<p class='text-center colorgreen font-weight-bold'>Connection réussis</p>";
               header('Refresh: 1; URL=index.php');
             }
           }
         } else {
-          echo "<p class='text-center colorred'>Pseudo ou mot de passe faux</p>";
+          echo "<p class='text-center colorred font-weight-bold'>Pseudo ou mot de passe faux</p>";
         }
         }
         else {
           $_SESSION['isConnect'] = 1;
-          echo "<p class='text-center colorred'>Pseudo ou mot de passe faux</p>";
+          echo "<p class='text-center colorred font-weight-bold'>Pseudo ou mot de passe faux</p>";
         }
       }
 

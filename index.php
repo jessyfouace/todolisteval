@@ -10,39 +10,74 @@ require('config.php') ?>
 <?php require('doctype.php'); ?>
 <?php require('header.php'); ?>
 <?php
-  if (!empty($_SESSION['id'])) {
+  if (!empty($_SESSION['pseudo'])) {
     // check if the id of the session (by connect) is on the bdd
-    $create = $bdd->prepare('SELECT * FROM accounts WHERE id = :idtake');
-    $create->execute(array(
+    $account = $bdd->prepare('SELECT * FROM accounts WHERE id = :idtake');
+    $account->execute(array(
       'idtake' => $_SESSION['id']
     ));
-    $create = $create->fetch();
+    $account = $account->fetch();
     // if user is connected check the user id and check is he's connected
-    if ($create['verif_connect'] == 1) {
+    if ($account['verif_connect'] == 1) {
       echo '<div class="container mx-auto p-0 m-0 pt-2 col-12 text-center">
-        <a href=""><p class="col-6 mx-auto bgcircle backgroundgrey textaddproject">+</p></a>
+        <a href="addproject.php"><p class="col-6 mx-auto bgcircle backgroundgrey textaddproject">+</p></a>
       </div>
       <p class="text-center pb-2">Ajouter un projet</p>';
-    } else {
+      // Watch the personal project with the id
+      if ($_SESSION['id'] !== "16") {
+        $checkproject = $bdd->prepare('SELECT * FROM projects WHERE id_account = :idtake ORDER BY id DESC');
+        $checkproject->execute(array(
+          'idtake' => $_SESSION['id']
+        ));
+        // See all tables (for if guys got more than 1 project)
+        $checkproject = $checkproject->fetchAll();
+        // foreach for put all personal project
+        foreach ($checkproject as $key => $value) {
+          echo '<div class="col-md-8 mx-auto mt-4" class="container">
+            <div class="row col-12 m-0 p-0">
+                <form class="p-0 m-0 col-3 col-md-1" action="removeproject.php?project=' . $value['id'] . '" method="post">
+                  <input class="remove w-100 h-100" type="submit" value="&#9988;">
+                </form>
+              <a class="borderindex col-12 col-md-10 p-0 m-0 backgroundgrey" href="viewproject.php?project=' . $value['id'] . '">
+                <div class="row justify-content-between m-0 p-0 col-12">
+                  <div class="nocolor col-8">
+                    <p class="pt-2">' . $value['project_name'] . '</p>
+                  </div>
+                  <i class="pt-3 borderindex seemore fas fa-arrow-right pl-1 pr-1"> Voir plus</i>
+                </div>
+              </a>
+            </div>
+          </div>';
+        }
+      } else {
+        $admincheck = $bdd->query('SELECT * FROM projects ORDER BY creator_name');
+        // See all tables (for if guys got more than 1 project)
+        $admincheck = $admincheck->fetchAll();
+        // foreach for put all personal project
+        foreach ($admincheck as $key => $value) {
+          echo '<div class="col-md-8 mx-auto mt-4" class="container">
+            <div class="row col-12 m-0 p-0">
+                <form class="p-0 m-0 col-3 col-md-1" action="removeproject.php?project=' . $value['id'] . '" method="post">
+                  <input class="remove w-100 h-100" type="submit" value="&#9988;">
+                </form>
+              <a class="borderindex col-12 col-md-10 p-0 m-0 backgroundgrey" href="viewproject.php?project=' . $value['id'] . '">
+                <div class="row justify-content-between m-0 p-0 col-12">
+                  <div class="nocolor col-8">
+                    <p class="pt-2">' . $value['project_name'] . ' | Créer par: ' . $value['creator_name'] . '</p>
+                  </div>
+                  <i class="pt-3 borderindex seemore fas fa-arrow-right pl-1 pr-1"> Voir plus</i>
+                </div>
+              </a>
+            </div>
+          </div>';
+      }
+    }
+  } else {
       echo '<p class="text-center pt-3">Pour ajouter un projet vous devez vous <a href="connect.php">Connecter</a></p>';
     }
   } else {
     echo '<p class="text-center pt-3">Pour ajouter un projet vous devez vous <a href="connect.php">Connecter</a></p>';
   }
 ?>
-  <div class="col-md-8 mx-auto mt-4" class="container">
-    <div class="row col-12 m-0 p-0">
-      <a class="p-0 m-0 col-3 col-md-1" href="">
-        <i class="fas fa-trash-alt col-12 text-center p-0 m-0 pt-3 pb-2 pb-md-0"></i>
-      </a>
-      <a class="borderindex col-12 col-md-10 p-0 m-0 backgroundgrey" href="viewproject.php">
-        <div class="row justify-content-between m-0 p-0 col-12">
-          <div class="nocolor col-8">
-            <p class="pt-2">NOM DU PROJET</p>
-          </div>
-          <i class="pt-3 borderindex seemore fas fa-arrow-right pl-1 pr-1"> Voir plus</i>
-        </div>
-      </a>
-    </div>
-  </div>
+
 <?php require('script.php'); ?>

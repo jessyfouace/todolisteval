@@ -96,7 +96,9 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-
+body{
+  word-wrap: break-word;
+}
 /**********/
 /* HEADER */
 /**********/
@@ -171,6 +173,15 @@ header{
 
 .colorgreen {
   color: green;
+}
+
+.remove{
+  font-size: 20px;
+  background: inherit;
+  border: none;
+}
+.remove:hover{
+  cursor: pointer;
 }
 /* ==========================================================================
    Helper classes

@@ -60,7 +60,7 @@ require('header.php');
         ));
         $checkmail = $checkmail->fetchAll();
         if ($checkmail) {
-          echo "<p class='text-center colorred'>Adresse e-mail déjà utiliser</p>";
+          echo "<p class='text-center colorred font-weight-bold'>Adresse e-mail déjà utiliser</p>";
           header('location=inscription.php');
         } else {
         // Security for pseudo
@@ -72,7 +72,7 @@ require('header.php');
           ));
           $checkpseudo = $checkpseudo->fetchAll();
           if ($checkpseudo) {
-            echo "<p class='text-center colorred'>Pseudo déjà utiliser</p>";
+            echo "<p class='text-center colorred font-weight-bold'>Pseudo déjà utiliser</p>";
             header('location=inscription.php');
           } else {
             // Security for password
@@ -85,36 +85,26 @@ require('header.php');
                 'password' => password_hash($_POST['firstpasswordinscription'], PASSWORD_DEFAULT),
                 'connect' => 0
               ));
-              // take the id of the user
-              $lastid = $bdd->lastInsertId();
-              // select the user by the id for create session of him
-                $create = $bdd->query('SELECT * FROM accounts WHERE id=' . $lastid . '');
-                $create = $create->fetchAll();
-                foreach ($create as $key => $value) {
-                  $_SESSION['pseudo'] = $value['user_name'];
-                  $_SESSION['mdp'] = password_verify($_POST['firstpasswordinscription'], $value['user_password']);
-                  $_SESSION['id'] = $value['id'];
-                }
-              echo "<br><p class='text-center colorgreen'>Inscription Réussis.</p>";
+              echo "<br><p class='text-center colorgreen font-weight-bold'>Inscription Réussis.</p>";
               header('Refresh: 2; URL=connect.php');
             }
             else {
               $_SESSION['isConnect'] = 0;
-              echo "<p class='text-center colorred'>Entrez un bon mot de passe</p>";
+              echo "<p class='text-center colorred font-weight-bold'>Entrez un bon mot de passe</p>";
             }
           }
         } else {
             $_SESSION['isConnect'] = 0;
-            echo "<p class='text-center colorred'>Le pseudo est soit déjà utiliser ou non valide</p>";
+            echo "<p class='text-center colorred font-weight-bold'>Le pseudo est soit déjà utiliser ou non valide</p>";
         }
       }
       } else {
         $_SESSION['isConnect'] = 0;
-        echo "<p class='text-center colorred'>Entrez une bonne adresse e-mail</p>";
+        echo "<p class='text-center colorred font-weight-bold'>Entrez une bonne adresse e-mail</p>";
       }
     }
     else {
-      echo "<p class='text-center colorred'>Les 2 mot de passe ne sont pas identique</p>";
+      echo "<p class='text-center colorred font-weight-bold'>Les 2 mot de passe ne sont pas identique</p>";
     }
   }
 ?>
