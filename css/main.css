@@ -183,6 +183,26 @@ header{
 .remove:hover{
   cursor: pointer;
 }
+
+/****************/
+/* PROJECT VIEW */
+/****************/
+
+.titleprojectview{
+  border: 1px solid black;
+}
+
+.checkedprojectview{
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
+
+li{
+  list-style-type: none;
+  font-size: 20px;
+}
+
 /* ==========================================================================
    Helper classes
    ========================================================================== */
