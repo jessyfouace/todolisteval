@@ -97,12 +97,22 @@ textarea {
    Author's custom styles
    ========================================================================== */
 
+.sizeimage{
+  width: 150px;
+}
 
+a{
+  color: black;
+  font-weight: bold;
+}
+a:hover{
+  color: #1d9cd7;
+  text-decoration: none;
+}
 
-
-
-
-
+header{
+  background-color: #f9f9fa;
+}
 
 
 
