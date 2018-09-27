@@ -11,11 +11,11 @@ require('config.php') ?>
 <?php require('header.php'); ?>
 
 <form class="text-center" action="addproject.php" method="post">
-  <label for="titleproject">Titre du projet:</label><br>
+  <label for="titleproject">Titre du projet: (max 255 caractères)</label><br>
   <input class="addprojectinput" id="titleproject" type="text" name="titleproject"><br>
-  <label for="descproject">Description du projet:</label><br>
+  <label for="descproject">Description du projet: (max 255 caractères)</label><br>
   <textarea id="descproject" name="descproject" rows="6" cols="30" placeholder="..."></textarea><br>
-  <label for="deadlineproject">Date limite du projet:</label><br>
+  <label for="deadlineproject">Date limite du projet: (format 01/01/2018)</label><br>
   <input class="addprojectinput" id="deadlineproject" type="text" name="deadlineproject" placeholder="01/01/2018"><br>
   <input class="mt-2 addprojectsubmit" type="submit" value="Créer">
 </form>
@@ -25,7 +25,7 @@ require('config.php') ?>
     $titleproject = htmlspecialchars(addslashes(strip_tags($_POST['titleproject'])));
     $descproject = htmlspecialchars(addslashes(strip_tags($_POST['descproject'])));
     $deadlineproject = htmlspecialchars(addslashes(strip_tags($_POST['deadlineproject'])));
-    if (preg_match("#[0-9]{2}+/[0-9]{2}+/[0-9]{4}$#", $deadlineproject)) {
+    if (preg_match("#[0-3]{1}[0-9]{1}+/[0-1]{1}[0-9]{1}+/[0-9]{4}$#", $deadlineproject)) {
       $addproject = $bdd->prepare("INSERT INTO projects (project_name, project_desc, project_limit, creator_name, id_account) VALUES (:name, :description, :datelimit, :creator, :idaccount)");
       $addproject->execute(array(
         'name' => $titleproject,

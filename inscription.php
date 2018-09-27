@@ -17,27 +17,15 @@ require('header.php');
 	<p class="text-center">Toutes données restent confidentiels</p>
   <form action="inscription.php" method="post">
   	<div class="form-group input-group">
-  		<div class="input-group-prepend">
-  		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-  		 </div>
           <input class="form-control" placeholder="Pseudonyme" type="text" name="inscriptionpseudo" required>
       </div> <!-- form-group// -->
       <div class="form-group input-group">
-      	<div class="input-group-prepend">
-  		    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
-  		 </div>
           <input class="form-control" placeholder="Adresse Email" type="email" name="inscriptionmail" required>
       </div> <!-- form-group// -->
       <div class="form-group input-group">
-      	<div class="input-group-prepend">
-  		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-  		</div>
           <input class="form-control" placeholder="Mot de passe" type="password" name="firstpasswordinscription" required>
       </div> <!-- form-group// -->
       <div class="form-group input-group">
-      	<div class="input-group-prepend">
-  		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-  		</div>
           <input class="form-control" placeholder="Répetez le mot de passe" type="password" name="secondpasswordinscription" required>
       </div> <!-- form-group// -->
       <div class="form-group">
