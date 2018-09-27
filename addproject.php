@@ -9,6 +9,8 @@ require('config.php') ?>
   <meta name="description" content="Site de Todolist gratuit et automatique avec système de compte. Todolist gratuit en ligne">
 <?php require('doctype.php'); ?>
 <?php require('header.php'); ?>
+<?php
+if (!empty($_SESSION['id'])) { ?>
 <nav class="breadcrumb">
   <a class="breadcrumb-item" href="index.php">Accueil</a>
   <span class="breadcrumb-item active">Ajouter un produit</span>
@@ -42,8 +44,9 @@ require('config.php') ?>
       echo "<p class='colorred font-weight-bold pt-3 text-center'>Il s'emblerait que vous n'ayez pas mit une bonne date format: (01/01/2018).</p>";
     }
   }
-
-
+} else {
+  header("location: index.php");
+}
 ?>
 
 <?php require('script.php'); ?>

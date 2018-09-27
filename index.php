@@ -23,7 +23,7 @@ require('config.php') ?>
     // if user is connected check the user id and check is he's connected
     if ($account['verif_connect'] == 1) {
       echo '<div class="container mx-auto p-0 m-0 pt-2 col-12 text-center">
-        <a href="addproject.php"><p class="col-6 mx-auto bgcircle backgroundgrey textaddproject">+</p></a>
+        <a href="addproject.php"><p class="col-6 mx-auto bgcircle backgroundgreycircle textaddproject">+</p></a>
       </div>
       <p class="text-center pb-2">Ajouter un projet</p>';
       // Watch the personal project with the id

@@ -11,6 +11,7 @@ require('config.php') ?>
 <?php require('header.php'); ?>
 
 <?php
+if (!empty($_SESSION['id'])) {
 $taskbyproject = $bdd->prepare('SELECT * FROM projects WHERE id = :getid');
 $taskbyproject->execute(array(
   'getid' => $_GET['project']
@@ -75,6 +76,9 @@ if ($taskbyproject['id_account'] == $_SESSION['id'] || $_SESSION['id'] == 16) {
   echo "<p class='text-center pt-3 colorred font-weight-bold'>Vous n'êtes pas sur l'un de vos projet. <br> Redirection automatique.</p>";
   echo "<p class='text-center'> Si la redirection ne marche pas <a href='index.php'>Cliquez ici</a></p>";
   header('Refresh: 2; URL=index.php');
+}
+} else {
+  header('location: index.php');
 }
 ?>
 <?php require('script.php') ?>
