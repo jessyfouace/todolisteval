@@ -9,6 +9,8 @@ require('config.php') ?>
   <meta name="description" content="Site de Todolist gratuit et automatique avec système de compte. Todolist gratuit en ligne">
 <?php require('doctype.php');
 require('header.php');
+?>
+<?php
 
 // Verify if user is connected
 if (!empty($_SESSION['pseudo'])) {
@@ -37,6 +39,10 @@ if (!empty($_SESSION['pseudo'])) {
     }
     // Security for user can't see other project without admin can see all project
     if ($detailproject['id_account'] == $_SESSION['id'] || $_SESSION['id'] == "16") {
+      echo '<nav class="breadcrumb">
+        <a class="breadcrumb-item" href="index.php">Accueil</a>
+        <span class="breadcrumb-item active">' . $detailproject['project_name'] . '</span>
+      </nav>';
       echo "<p class='text-center pt-2'>Nom du projet: " . $detailproject['project_name'] . "</p>
             <p class='text-center'>Description du projet: " . $detailproject['project_desc'] . "</p>
             <p class='text-center'>Date limite du projet: " . $detailproject['project_limit'] . "</p>";

@@ -34,6 +34,12 @@ if ($taskbyproject['id_account'] == $_SESSION['id'] || $_SESSION['id'] == 16) {
     'getid' => $_GET['list']
   ));
   $task = $task->fetch();
+  echo '
+  <nav class="breadcrumb">
+    <a class="breadcrumb-item" href="index.php">Accueil</a>
+    <a class="breadcrumb-item" href="viewproject.php?project=' . $_GET['project'] . '">Voir projet</a>
+    <span class="breadcrumb-item active">' . $taskbylist['list'] . '</span>
+  </nav>';
   echo "<div class='col-12 col-md-5 m-0 p-0 mt-5 mx-auto text-center nocolor mb-5'>
     <div class='titleprojectview col-12 m-0 p-0'>
       <p class='pt-2 font-weight-bold'>" . $taskbylist['list'] . "<p>
