@@ -9,7 +9,10 @@ require('config.php') ?>
   <meta name="description" content="Site de Todolist gratuit et automatique avec système de compte. Todolist gratuit en ligne">
 <?php require('doctype.php'); ?>
 <?php require('header.php'); ?>
-
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="index.php">Accueil</a>
+  <span class="breadcrumb-item active">Ajouter un produit</span>
+</nav>
 <form class="text-center" action="addproject.php" method="post">
   <label for="titleproject">Titre du projet: (max 255 caractères)</label><br>
   <input class="addprojectinput" id="titleproject" type="text" name="titleproject"><br>

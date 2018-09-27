@@ -17,6 +17,12 @@ $viewconnect->execute(array(
 ));
 $viewconnect = $viewconnect->fetch();
 if ($_GET['creator'] == $_SESSION['id'] || $_SESSION['id'] == "16") {
+  echo '<nav class="breadcrumb">
+    <a class="breadcrumb-item" href="index.php">Accueil</a>
+    <a class="breadcrumb-item" href="viewproject.php?project=' . $_GET['project'] . '">Voir projet</a>
+    <a class="breadcrumb-item" href="viewtask.php?list=' . $_GET['idlist'] . '&project=' . $_GET['project'] . '&creator=' . $_GET['creator'] . '">Listes projet</a>
+    <span class="breadcrumb-item active">Ajout de tâche</span>
+  </nav>';
   echo  "<form class='col-12 text-center' action='addtask.php?idlist=" . $_GET['idlist'] . '&project=' . $_GET['project'] . '&creator=' . $_GET['creator'] . "' method='post'>
           <label for='nametask'>Nom de la tâche: (max 20 caractères)</label><br>
           <input id='nametask' type='text' name='taskname'><br>

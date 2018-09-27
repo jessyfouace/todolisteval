@@ -9,6 +9,9 @@ require('config.php') ?>
   <meta name="description" content="Site de Todolist gratuit et automatique avec système de compte. Todolist gratuit en ligne">
 <?php require('doctype.php'); ?>
 <?php require('header.php'); ?>
+<nav class="breadcrumb">
+  <a class="breadcrumb-item" href="index.php">Accueil</a>
+</nav>
 <?php
   if (!empty($_SESSION['pseudo'])) {
     // check if the id of the session (by connect) is on the bdd
