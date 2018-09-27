@@ -1,5 +1,7 @@
 <?php
+session_start();
 require('config.php');
+if (!empty($_SESSION['id'])) {
 if (!empty($_POST['checkedorno'])) {
   $checked = $bdd->prepare('UPDATE tasklist SET checked=1 WHERE task_name=:takename');
   $checked->execute(array(
@@ -14,5 +16,8 @@ if (!empty($_POST['checkedorno'])) {
     'takename' => $_GET['name']
   ));
   header('location: viewtask.php?list=' . $_GET['list'] . '&project=' . $_GET['project'] . '&creator=' . $_GET['creator'] . '');
+}
+} else {
+ header('location: index.php');
 }
 ?>
