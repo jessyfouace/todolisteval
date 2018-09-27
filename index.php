@@ -73,10 +73,10 @@ require('config.php') ?>
       }
     }
   } else {
-      echo '<p class="text-center pt-3">Pour ajouter un projet vous devez vous <a href="connect.php">Connecter</a></p>';
+      header('location: connect.php');
     }
   } else {
-    echo '<p class="text-center pt-3">Pour ajouter un projet vous devez vous <a href="connect.php">Connecter</a></p>';
+    header('location: connect.php');
   }
 ?>
 

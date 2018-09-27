@@ -11,22 +11,15 @@ require('config.php'); ?>
 require('doctype.php');
 require('header.php');
 ?>
-<!-- template take at https://bootsnipp.com/snippets/z8699  -->
 <?php if (empty($_SESSION['pseudo'])) { ?>
 <article class="card-body mx-auto" style="max-width: 400px;">
 	<h4 class="card-title mt-3 text-center">Connection</h4>
 	<p class="text-center">Toutes données restent confidentiels</p>
   <form action="connect.php" method="post">
   	<div class="form-group input-group">
-  		<div class="input-group-prepend">
-  		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
-  		 </div>
           <input class="form-control" placeholder="Pseudonyme" type="text" name="connexionpseudo" required>
       </div> <!-- form-group// -->
       <div class="form-group input-group">
-      	<div class="input-group-prepend">
-  		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-  		</div>
           <input class="form-control" placeholder="Mot de passe" type="password" name="connexionpassword" required>
       </div> <!-- form-group// -->
       <div class="form-group">

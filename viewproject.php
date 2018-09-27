@@ -48,27 +48,35 @@ if (!empty($_SESSION['pseudo'])) {
       $listproject = $listproject->fetchAll();
       echo "<div class='row col-12 col-md-9 mx-auto m-0 p-0'>";
       foreach ($listproject as $key => $value) {
-        echo "<a class='col-12 col-md-5 mt-5 m-0 p-0 mx-auto' href='viewtask.php?list=" . $value['id'] . "&amp;project=" . $_GET['project'] . "'><div class='col-12 m-0 p-0 mx-auto text-center nocolor'>
+        echo "<a class='col-12 col-md-5 mt-5 m-0 p-0 mx-auto' href='viewtask.php?list=" . $value['id'] . "&amp;project=" . $_GET['project'] . "&amp;creator=" . $value['id_creator'] . "'><div class='col-12 m-0 p-0 mx-auto text-center nocolor'>
           <div class='titleprojectview col-12 m-0 p-0'>
           <form class='pt-1 position-absolute' action='removelist.php?list=" . $value['id'] . "&amp;project=" . $_GET['project'] . "' method='post'>
             <input class='remove w-100 h-100' type='submit' value='&#9988;'>
           </form>
-            <p>" . $value['list'] . "<p>
+            <p class='pt-2'>" . $value['list'] . "<p>
           </div>
           <div class='checkedprojectview'>
-            <ul class='m-0 p-0'>
-              <li>&#10003;test</li>
-              <li>&#10003;test</li>
-              <li>&#10003;test</li>
-              <li>&#10003;test</li>
-            </ul>
+            <ul class='m-0 p-0'>";
+            $tasklist = $bdd->prepare('SELECT * FROM tasklist WHERE id_task = :idlist');
+            $tasklist->execute(array(
+              'idlist' => $value['id']
+            ));
+            $tasklist = $tasklist->fetchAll();
+            foreach ($tasklist as $key => $value) {
+              if ($value['checked'] == 1) {
+                echo "<li>&#10003;" . $value['task_name'] . ": " . $value['task_limit'] .  "</li>";
+              } elseif ($value['checked'] == 0) {
+                echo "<li>" . $value['task_name'] . ": " . $value['task_limit'] . "</li>";
+              }
+            }
+            echo "</ul>
           </div>
         </div></a>";
       }
       echo "</div>";
       echo "<form class='text-center pt-5' action='veriflist.php?project=" . $_GET['project'] ."' method='post'>
         <p>Créer un tableau de tâche</p>
-        <label for='tasktablname'>Nom du tableau de tâche:</label><br>
+        <label for='tasktablname'>Nom du tableau de tâche: (max 20 caractères)</label><br>
         <input id='tasktablname' type='text' name='list_name'><br>
         <input class='mt-2' type='submit' value='Envoyer'>
       </form>";
