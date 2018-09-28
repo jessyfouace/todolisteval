@@ -23,12 +23,6 @@ $taskbylist->execute(array(
   'getid' => $_GET['list']
 ));
 $taskbylist = $taskbylist->fetch();
-
-$taskbycreator = $bdd->prepare('SELECT * FROM accounts WHERE id = :getid');
-$taskbycreator->execute(array(
-  'getid' => $_GET['creator']
-));
-$taskbycreator = $taskbycreator->fetch();
 if ($taskbyproject['id_account'] == $_SESSION['id'] || $_SESSION['id'] == 16) {
   $task = $bdd->prepare('SELECT * FROM tasks WHERE id_list = :getid');
   $task->execute(array(
@@ -54,17 +48,23 @@ if ($taskbyproject['id_account'] == $_SESSION['id'] || $_SESSION['id'] == 16) {
         echo "<p class='borderbottom p-3 colorred'>Après avoir cocher une case vous devez valider.";
         foreach ($tasklist as $key => $value) {
           if ($value['checked'] == 1) {
-          echo "<form class='col-12 pb-4 pt-4 borderbottom' action='veriftask.php?name=" . $value['task_name'] . "&amp;list=" . $_GET['list'] . "&amp;project=" . $_GET['project'] . "&amp;creator=" . $_GET['creator'] . "' method='post'>";
+          echo "<form class='col-12 pb-2 pt-4' action='veriftask.php?name=" . $value['task_name'] . "&amp;list=" . $_GET['list'] . "&amp;project=" . $_GET['project'] . "&amp;creator=" . $_GET['creator'] . "' method='post'>";
             echo "<input type='checkbox' name='checkedorno' checked><p>" . $value['task_name'] . ": " .  $value['task_limit'] . "</p>
             ";
             echo "<input type='submit' value='Valider'><br>
             </form>";
+            echo "<form class='col-12 pb-4 pt-2 borderbottom' action='removetask.php?idtask=" . $value['id'] . "&amp;idlist=" . $_GET['list'] . "&amp;project=" . $taskbyproject['id'] . "&amp;creator=" . $taskbyproject['id_account'] . "' method='post'>";
+            echo "<input class='remove w-100 h-100' type='submit' value='&#9988;'>";
+            echo "</form>";
           } elseif ($value['checked'] == 0) {
-            echo "<form class='col-12 pb-4 pt-4 borderbottom' action='veriftask.php?name=" . $value['task_name'] . "&amp;list=" . $_GET['list'] . "&amp;project=" . $_GET['project'] . "&amp;creator=" . $_GET['creator'] . "' method='post'>";
+            echo "<form class='col-12 pb-2 pt-4' action='veriftask.php?name=" . $value['task_name'] . "&amp;list=" . $_GET['list'] . "&amp;project=" . $_GET['project'] . "&amp;creator=" . $_GET['creator'] . "' method='post'>";
               echo "<input type='checkbox' name='checkedorno'><p>" . $value['task_name'] . ": " .  $value['task_limit'] . "</p>
               ";
               echo "<input type='submit' value='Valider'><br>
               </form>";
+              echo "<form class='col-12 pb-4 pt-2 borderbottom' action='removetask.php?idtask=" . $value['id'] . "&amp;idlist=" . $_GET['list'] . "&amp;project=" . $taskbyproject['id'] . "&amp;creator=" . $taskbyproject['id_account'] . "' method='post'>";
+              echo "<input class='remove w-100 h-100' type='submit' value='&#9988;'>";
+              echo "</form>";
           }
         }
   echo "<a href='addtask.php?idlist=" . $_GET['list'] . "&amp;project=" . $taskbyproject['id'] . "&amp;creator=" . $taskbyproject['id_account'] . "'><div class='addtask'>
