@@ -40,8 +40,8 @@ require('script.php'); ?>
 <?php
 
 if (!empty($_POST['taskname']) AND !empty($_POST['tasklimit'])) {
-  $taskname = htmlspecialchars($_POST['taskname']);
-  $tasklimit = htmlspecialchars($_POST['tasklimit']);
+  $taskname = htmlspecialchars(addslashes(strip_tags($_POST['taskname'])));
+  $tasklimit = htmlspecialchars(addslashes(strip_tags($_POST['tasklimit'])));
   if (preg_match("#[0-3]{1}[0-9]{1}+/[0-1]{1}[0-9]{1}+/[0-9]{4}$#", $tasklimit)) {
     $newtask = $bdd->prepare("INSERT INTO tasklist (task_name, task_limit, checked, id_task, creator_project) VALUES (:name, :limitdate, :checked, :idlist, :creator_project)");
     $newtask->execute(array(
