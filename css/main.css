@@ -177,9 +177,11 @@ header{
   background-color: #e9ecef;
   transform: scaleX(0);
   transform-origin: 0 50%;
-  transition: 0.5s ease-out;
+  transition: 0.3s ease-out;
 }
-.backgroundgrey:hover:before{transform: scaleX(0.999);}
+.backgroundgrey:hover:before{
+  transform: scaleX(0.999);
+}
 
 
 .bgcircle{
