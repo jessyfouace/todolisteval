@@ -14,6 +14,11 @@ require('config.php') ?>
 </nav>
 <?php
   if (!empty($_SESSION['pseudo'])) {
+    if ($_SESSION['admin'] == 1) {
+      echo "<div class='pt-2 pb-2 col-12 text-center'>
+      <a href='addadmin.php'>Ajouter un administrateur</a>
+      </div>";
+    }
     // check if the id of the session (by connect) is on the bdd
     $account = $bdd->prepare('SELECT * FROM accounts WHERE id = :idtake');
     $account->execute(array(
@@ -27,7 +32,7 @@ require('config.php') ?>
       </div>
       <p class="text-center pb-2">Ajouter un projet</p>';
       // Watch the personal project with the id
-      if ($_SESSION['id'] !== "16") {
+      if ($_SESSION['admin'] !== "1") {
         $checkproject = $bdd->prepare('SELECT * FROM projects WHERE id_account = :idtake ORDER BY id DESC');
         $checkproject->execute(array(
           'idtake' => $_SESSION['id']

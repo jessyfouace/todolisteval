@@ -17,7 +17,7 @@ if (!empty($_SESSION['id'])) {
     'getid' => $_GET['project']
   ));
   $viewconnect = $viewconnect->fetch();
-  if ($_GET['creator'] == $_SESSION['id'] || $_SESSION['id'] == "16") {
+  if ($_GET['creator'] == $_SESSION['id'] || $_SESSION['admin'] == "1") {
     echo '<nav class="breadcrumb">
       <a class="breadcrumb-item" href="index.php">Accueil</a>
       <a class="breadcrumb-item" href="viewproject.php?project=' . $_GET['project'] . '">Voir projet</a>
@@ -31,6 +31,8 @@ if (!empty($_SESSION['id'])) {
             <input id='tasklimit' type='text' name='tasklimit'><br>
             <input type='submit' value='Envoyer'>
           </form>";
+  } else {
+    header('location: index.php');
   }
 } else {
   header('location: index.php');
