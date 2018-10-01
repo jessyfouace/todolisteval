@@ -50,6 +50,12 @@ require('header.php');
               $_SESSION['pseudo'] = $value['user_name'];
               $_SESSION['mdp'] = password_verify($_POST['connexionpassword'], $value['user_password']);
               $_SESSION['id'] = $value['id'];
+              if ($value['admin'] == "1") {
+                $_SESSION['admin'] = "1";
+              }
+              if($value['admin'] == NULL){
+                $_SESSION['admin'] = "0";
+              }
               // make the guys connected (for bdd)
               $create = $bdd->prepare('UPDATE accounts SET verif_connect=1 WHERE id=:takeid');
               $create->execute  (array(

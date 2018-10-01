@@ -38,7 +38,7 @@ if (!empty($_SESSION['pseudo'])) {
       $detailproject = $detailproject->fetch();
     }
     // Security for user can't see other project without admin can see all project
-    if ($detailproject['id_account'] == $_SESSION['id'] || $_SESSION['id'] == "16") {
+    if ($detailproject['id_account'] == $_SESSION['id'] || $_SESSION['admin'] == "1") {
       echo '<nav class="breadcrumb">
         <a class="breadcrumb-item" href="index.php">Accueil</a>
         <span class="breadcrumb-item active">' . $detailproject['project_name'] . '</span>

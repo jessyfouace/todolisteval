@@ -23,7 +23,7 @@ $taskbylist->execute(array(
   'getid' => $_GET['list']
 ));
 $taskbylist = $taskbylist->fetch();
-if ($taskbyproject['id_account'] == $_SESSION['id'] || $_SESSION['id'] == 16) {
+if ($taskbyproject['id_account'] == $_SESSION['id'] || $_SESSION['admin'] == "1") {
   $task = $bdd->prepare('SELECT * FROM tasks WHERE id_list = :getid');
   $task->execute(array(
     'getid' => $_GET['list']
