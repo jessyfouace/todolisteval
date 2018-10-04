@@ -22,7 +22,7 @@ if (!empty($_SESSION['pseudo'])) {
   // if user is connected check the user id and check is he's connected
   if ($account['verif_connect'] == 1) {
     // If the person who check the project is no't an admin
-    if ($_SESSION['id'] !== "16") {
+    if ($_SESSION['admin'] !== "1") {
       $detailproject = $bdd->prepare('SELECT * FROM projects WHERE id_account = :idtake AND id = :getid');
       $detailproject->execute(array(
         'idtake' => $_SESSION['id'],

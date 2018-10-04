@@ -4,7 +4,7 @@ require('config.php') ?>
 <html class="no-js" lang="fr">
 
 <head>
-  <title>Accueil</title>
+  <title>Ajouter un administrateur</title>
   <meta charset="utf-8">
   <meta name="description" content="Site de Todolist gratuit et automatique avec système de compte. Todolist gratuit en ligne">
 <?php require('doctype.php'); ?>
@@ -14,7 +14,9 @@ require('config.php') ?>
   <span class="breadcrumb-item active">Ajout d'administrateur</span>
 </nav>
 <?php
+// Check if guys connected
   if (!empty($_SESSION['pseudo'])) {
+    // Check if it's an admin
     if ($_SESSION['admin'] == "1") {
       echo '<form class="col-12 text-center" action="addadmin.php" method="post">
         <label for="addadmin">Pseudo de la personne à ajouter en tant qu\'administrateur:</label><br>
@@ -34,12 +36,15 @@ require('config.php') ?>
   }
 ?>
 <?php
+// If nickname input for add is not empty
 if (!empty($_POST['nickname'])) {
+  // Check if nickname exist
   $checkpseudo = $bdd->prepare('SELECT * FROM accounts WHERE user_name=:checkpseudo');
   $checkpseudo->execute(array(
     'checkpseudo' => $_POST['nickname']
   ));
   $checkpseudo = $checkpseudo->fetchAll();
+  // If nickname exist add admin = 1
   if ($checkpseudo) {
     $passedadmin = $bdd->prepare('UPDATE accounts SET admin=1 WHERE user_name=:checkpseudo');
     $passedadmin->execute(array(

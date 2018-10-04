@@ -11,12 +11,14 @@ require('config.php') ?>
 <?php require('doctype.php'); ?>
 <?php require('header.php'); ?>
 <?php
+// Check if guys is connected
 if (!empty($_SESSION['id'])) {
   $viewconnect = $bdd->prepare('SELECT * FROM lists WHERE id_project = :getid');
   $viewconnect->execute(array(
     'getid' => $_GET['project']
   ));
   $viewconnect = $viewconnect->fetch();
+  // Security for only can create user task
   if ($_GET['creator'] == $_SESSION['id'] || $_SESSION['admin'] == "1") {
     echo '<nav class="breadcrumb">
       <a class="breadcrumb-item" href="index.php">Accueil</a>
@@ -40,11 +42,14 @@ if (!empty($_SESSION['id'])) {
 require('script.php'); ?>
 
 <?php
-
+// if input is no't empty
 if (!empty($_POST['taskname']) AND !empty($_POST['tasklimit'])) {
+  // Add security for input
   $taskname = htmlspecialchars(addslashes(strip_tags($_POST['taskname'])));
   $tasklimit = htmlspecialchars(addslashes(strip_tags($_POST['tasklimit'])));
+  // Check if date is good version 03/07/2018 example
   if (preg_match("#[0-3]{1}[0-9]{1}+/[0-1]{1}[0-9]{1}+/[0-9]{4}$#", $tasklimit)) {
+    // Insert all we need
     $newtask = $bdd->prepare("INSERT INTO tasklist (task_name, task_limit, checked, id_task, creator_project) VALUES (:name, :limitdate, :checked, :idlist, :creator_project)");
     $newtask->execute(array(
       'name' => $taskname,

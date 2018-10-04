@@ -11,18 +11,21 @@ require('config.php') ?>
 <?php require('header.php'); ?>
 
 <?php
+// Check if user connected
 if (!empty($_SESSION['id'])) {
+  // Take all information of projects
 $taskbyproject = $bdd->prepare('SELECT * FROM projects WHERE id = :getid');
 $taskbyproject->execute(array(
   'getid' => $_GET['project']
 ));
 $taskbyproject = $taskbyproject->fetch();
-
+  // Take all information of lists
 $taskbylist = $bdd->prepare('SELECT * FROM lists WHERE id = :getid');
 $taskbylist->execute(array(
   'getid' => $_GET['list']
 ));
 $taskbylist = $taskbylist->fetch();
+  // show only user task
 if ($taskbyproject['id_account'] == $_SESSION['id'] || $_SESSION['admin'] == "1") {
   $task = $bdd->prepare('SELECT * FROM tasks WHERE id_list = :getid');
   $task->execute(array(
@@ -40,6 +43,7 @@ if ($taskbyproject['id_account'] == $_SESSION['id'] || $_SESSION['admin'] == "1"
       <p class='pt-2 font-weight-bold'>" . $taskbylist['list'] . "<p>
     </div>
     <div class='checkedprojectview col-12 text-center m-0 p-0'>";
+    // Show all task by the id of the list
         $tasklist = $bdd->prepare('SELECT * FROM tasklist WHERE id_task = :getid');
         $tasklist->execute(array(
           'getid' => $_GET['list']
@@ -47,6 +51,7 @@ if ($taskbyproject['id_account'] == $_SESSION['id'] || $_SESSION['admin'] == "1"
         $tasklist = $tasklist->fetchAll();
         echo "<p class='borderbottom p-3 colorred'>Après avoir cocher une case vous devez valider.";
         foreach ($tasklist as $key => $value) {
+          // If on bdd the task is did
           if ($value['checked'] == 1) {
           echo "<form class='col-12 pb-2 pt-4' action='veriftask.php?name=" . $value['task_name'] . "&amp;list=" . $_GET['list'] . "&amp;project=" . $_GET['project'] . "&amp;creator=" . $_GET['creator'] . "' method='post'>";
             echo "<input type='checkbox' name='checkedorno' checked><p>" . $value['task_name'] . ": " .  $value['task_limit'] . "</p>
@@ -56,6 +61,7 @@ if ($taskbyproject['id_account'] == $_SESSION['id'] || $_SESSION['admin'] == "1"
             echo "<form class='col-12 pb-4 pt-2 borderbottom' action='removetask.php?idtask=" . $value['id'] . "&amp;idlist=" . $_GET['list'] . "&amp;project=" . $taskbyproject['id'] . "&amp;creator=" . $taskbyproject['id_account'] . "' method='post'>";
             echo "<input class='remove w-100 h-100' type='submit' value='&#9988;'>";
             echo "</form>";
+            // If on bdd the task is no't
           } elseif ($value['checked'] == 0) {
             echo "<form class='col-12 pb-2 pt-4' action='veriftask.php?name=" . $value['task_name'] . "&amp;list=" . $_GET['list'] . "&amp;project=" . $_GET['project'] . "&amp;creator=" . $_GET['creator'] . "' method='post'>";
               echo "<input type='checkbox' name='checkedorno'><p>" . $value['task_name'] . ": " .  $value['task_limit'] . "</p>
