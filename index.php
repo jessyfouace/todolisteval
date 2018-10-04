@@ -41,8 +41,8 @@ if (!empty($_SESSION['pseudo'])) {
 <?php
   if (!empty($_SESSION['pseudo'])) {
     if ($_SESSION['admin'] == 1) {
-      echo "<a href='addadmin.php'><div class='pt-2 pb-0 col-12 text-center admin'>
-      <p>Ajouter un administrateur</p>
+      echo "<a href='panneladmin.php?basic=1'><div class='pt-2 pb-0 col-12 text-center admin'>
+      <p>Pannel administrateur</p>
       </div></a>";
     }
     // check if the id of the session (by connect) is on the bdd
@@ -68,7 +68,7 @@ if (!empty($_SESSION['pseudo'])) {
         $checkproject = $checkproject->fetchAll();
         // foreach for put all personal project
         foreach ($checkproject as $key => $value) {
-          echo '<div class="col-md-8 mx-auto mt-4 container">
+          echo '<div class="col-md-8 mx-auto mt-4 container mb-2">
             <div class="row col-12 m-0 p-0">
                 <form class="p-0 m-0 col-3 col-md-1" action="removeproject.php?project=' . $value['id'] . '" method="post">
                   <input class="remove w-100 h-100" type="submit" value="&#9988;">
@@ -90,7 +90,7 @@ if (!empty($_SESSION['pseudo'])) {
         $admincheck = $admincheck->fetchAll();
         // foreach for put all personal project
         foreach ($admincheck as $key => $value) {
-          echo '<div class="col-md-8 mx-auto mt-4">
+          echo '<div class="col-md-8 mx-auto mt-4 container mb-2">
             <div class="row col-12 m-0 p-0">
                 <form class="p-0 m-0 col-3 col-md-1" action="removeproject.php?project=' . $value['id'] . '" method="post">
                   <input class="remove w-100 h-100" type="submit" value="&#9988;">

@@ -18,7 +18,7 @@ if (!empty($_POST['nicknameadmin'])) {
       $removedadmin->execute(array(
         'checkpseudo' => $_POST['nicknameadmin']
       ));
-      header('location: addadmin.php');
+      header('location: panneladmin.php?basic=4');
     }
   } else {
     // if value is Rayteur, remove the admin because he try to remove "fondator"
@@ -29,5 +29,7 @@ if (!empty($_POST['nicknameadmin'])) {
     $_SESSION['admin'] = "0";
     header('location: index.php');
   }
+} else {
+  header('location: index.php');
 }
 ?>

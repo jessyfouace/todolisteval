@@ -222,6 +222,14 @@ header{
 /* PROJECT VIEW */
 /****************/
 
+.colorwhite{
+  color: white;
+}
+
+.informationbar{
+  background-color: #1498d5;
+}
+
 .titleprojectview{
   border: 1px solid black;
 }

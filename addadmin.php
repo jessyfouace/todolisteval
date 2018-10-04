@@ -46,11 +46,15 @@ if (!empty($_POST['nickname'])) {
   $checkpseudo = $checkpseudo->fetchAll();
   // If nickname exist add admin = 1
   if ($checkpseudo) {
+    echo '<p class="colorgreen font-weight-bold text-center pt-2">'. $_POST["nickname"] . ' a bien étais ajouté.</p>';
     $passedadmin = $bdd->prepare('UPDATE accounts SET admin=1 WHERE user_name=:checkpseudo');
     $passedadmin->execute(array(
       'checkpseudo' => $_POST['nickname']
     ));
-    header('location: addadmin.php');
-  }
+    header('Refresh: 1.5; URL=addadmin.php');
+  }  else {
+      echo '<p class="colorred font-weight-bold text-center pt-2">Cet Administrateur n\'existe pas.</p>';
+      header('Refresh: 1.5; URL=addadmin.php'); 
+    }
 }
 ?>
