@@ -34,6 +34,9 @@ if (!empty($_SESSION['id'])) { ?>
     setlocale(LC_TIME, "fr_FR.iso88591");
     // Put the string on date time
     $dateformat = ucfirst(strftime("%A %d %B %G", strtotime($dateday)));
+    $hours = date('H:i');
+    $datehours = $dateformat . " à " . $hours;
+    echo $datehours;
     // Protect the input by htmlspecialchars and allow guys to add simple cot
     $titleproject = htmlspecialchars(addslashes(strip_tags($_POST['titleproject'])));
     $descproject = htmlspecialchars(addslashes(strip_tags($_POST['descproject'])));
@@ -48,7 +51,7 @@ if (!empty($_SESSION['id'])) { ?>
         'datelimit' => $deadlineproject,
         'creator' => $_SESSION['pseudo'],
         'idaccount' => $_SESSION['id'],
-        'create_date' => $dateformat
+        'create_date' => $datehours
       ));
       header('location: index.php');
     } else {

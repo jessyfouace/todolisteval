@@ -49,11 +49,14 @@ if ($taskbyproject['id_account'] == $_SESSION['id'] || $_SESSION['admin'] == "1"
           'getid' => $_GET['list']
         ));
         $tasklist = $tasklist->fetchAll();
-        echo "<p class='borderbottom p-3 colorred'>Après avoir cocher une case vous devez valider.";
+        echo "<p class='borderbottom p-3 colorred'>Après avoir cocher une case vous devez valider.</p>";
+        $lengthchecked = 0;
+        $lengthnotchecked = 0;
         foreach ($tasklist as $key => $value) {
           // If on bdd the task is did
           if ($value['checked'] == 1) {
-          echo "<form class='col-12 pb-2 pt-4' action='veriftask.php?name=" . $value['task_name'] . "&amp;list=" . $_GET['list'] . "&amp;project=" . $_GET['project'] . "&amp;creator=" . $_GET['creator'] . "' method='post'>";
+            $lengthchecked++;
+            echo "<form class='col-12 pb-2 pt-4' action='veriftask.php?name=" . $value['task_name'] . "&amp;list=" . $_GET['list'] . "&amp;project=" . $_GET['project'] . "&amp;creator=" . $_GET['creator'] . "' method='post'>";
             echo "<input type='checkbox' name='checkedorno' checked><p>" . $value['task_name'] . ": " .  $value['task_limit'] . "</p>
             ";
             echo "<input type='submit' value='Valider'><br>
@@ -63,6 +66,7 @@ if ($taskbyproject['id_account'] == $_SESSION['id'] || $_SESSION['admin'] == "1"
             echo "</form>";
             // If on bdd the task is no't
           } elseif ($value['checked'] == 0) {
+            $lengthnotchecked++;
             echo "<form class='col-12 pb-2 pt-4' action='veriftask.php?name=" . $value['task_name'] . "&amp;list=" . $_GET['list'] . "&amp;project=" . $_GET['project'] . "&amp;creator=" . $_GET['creator'] . "' method='post'>";
               echo "<input type='checkbox' name='checkedorno'><p>" . $value['task_name'] . ": " .  $value['task_limit'] . "</p>
               ";
@@ -73,6 +77,27 @@ if ($taskbyproject['id_account'] == $_SESSION['id'] || $_SESSION['admin'] == "1"
               echo "</form>";
           }
         }
+            if ($lengthchecked > 0) {
+              $calculall = $lengthchecked + $lengthnotchecked;
+              $firstcalcul = $lengthchecked / $calculall;
+              $secondcalcul = $firstcalcul * 100;
+              
+              ?><div class="col-12 m-0 p-0">
+                      <div class="col-12 m-0 p-0" style="height: 50px;">
+                        <div class="progress" style="height: 50px;">
+                          <div id="progressbarplayer" class="informationbar colorwhite pt-3" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo floor($secondcalcul) ?>%; height: 100px;">
+                            <?php echo "Fini à: "; 
+                                  echo floor($secondcalcul);
+                                  echo "%"; ?>
+                          </div>
+                        </div>
+                      </div>
+              </div>
+            <?php }
+            if($lengthchecked < 1) {
+              echo "0%";
+            }
+
   echo "<a href='addtask.php?idlist=" . $_GET['list'] . "&amp;project=" . $taskbyproject['id'] . "&amp;creator=" . $taskbyproject['id_account'] . "'><div class='addtask'>
             <i class='fas fa-plus-circle p-2'>Ajouter une tâche</i>
           </div></a>

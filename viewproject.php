@@ -68,12 +68,36 @@ if (!empty($_SESSION['pseudo'])) {
               'idlist' => $value['id']
             ));
             $tasklist = $tasklist->fetchAll();
+            $lengthnotchecked = 0;
+            $lengthchecked = 0;
             foreach ($tasklist as $key => $value) {
               if ($value['checked'] == 1) {
+                $lengthchecked++;
                 echo "<li>&#10003;" . $value['task_name'] . ": " . $value['task_limit'] .  "</li>";
               } elseif ($value['checked'] == 0) {
+                $lengthnotchecked++;
                 echo "<li>" . $value['task_name'] . ": " . $value['task_limit'] . "</li>";
               }
+            }
+            if ($lengthchecked > 0) {
+              $calculall = $lengthchecked + $lengthnotchecked;
+              $firstcalcul = $lengthchecked / $calculall;
+              $secondcalcul = $firstcalcul * 100;
+              
+              ?><div class="col-12 m-0 p-0">
+                      <div class="col-12 m-0 p-0 mt-2" style="height: 50px;">
+                        <div class="progress mt-2" style="height: 50px;">
+                          <div id="progressbarplayer" class="informationbar colorwhite pt-1" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo floor($secondcalcul) ?>%; height: 50px;">
+                            <?php echo "Fini à: "; 
+                                  echo floor($secondcalcul);
+                                  echo "%"; ?>
+                          </div>
+                        </div>
+                      </div>
+              </div>
+            <?php }
+            if($lengthchecked < 1) {
+              echo "0%";
             }
             echo "</ul>
           </div>

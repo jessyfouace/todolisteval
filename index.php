@@ -68,7 +68,7 @@ if (!empty($_SESSION['pseudo'])) {
         $checkproject = $checkproject->fetchAll();
         // foreach for put all personal project
         foreach ($checkproject as $key => $value) {
-          echo '<div class="col-md-8 mx-auto mt-4 container">
+          echo '<div class="col-md-8 mx-auto mt-4 container mb-2">
             <div class="row col-12 m-0 p-0">
                 <form class="p-0 m-0 col-3 col-md-1" action="removeproject.php?project=' . $value['id'] . '" method="post">
                   <input class="remove w-100 h-100" type="submit" value="&#9988;">
@@ -90,7 +90,7 @@ if (!empty($_SESSION['pseudo'])) {
         $admincheck = $admincheck->fetchAll();
         // foreach for put all personal project
         foreach ($admincheck as $key => $value) {
-          echo '<div class="col-md-8 mx-auto mt-4">
+          echo '<div class="col-md-8 mx-auto mt-4 container mb-2">
             <div class="row col-12 m-0 p-0">
                 <form class="p-0 m-0 col-3 col-md-1" action="removeproject.php?project=' . $value['id'] . '" method="post">
                   <input class="remove w-100 h-100" type="submit" value="&#9988;">
