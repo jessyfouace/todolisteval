@@ -13,7 +13,7 @@ require('config.php') ?>
 if (!empty($_SESSION['id'])) { ?>
 <nav class="breadcrumb">
   <a class="breadcrumb-item" href="index.php">Accueil</a>
-  <span class="breadcrumb-item active">Ajouter un produit</span>
+  <span class="breadcrumb-item active">Ajouter un projet</span>
 </nav>
 <form class="text-center" action="addproject.php" method="post">
   <label for="titleproject">Titre du projet: (max 255 caractères)</label><br>

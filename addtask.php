@@ -23,7 +23,7 @@ if (!empty($_SESSION['id'])) {
     echo '<nav class="breadcrumb">
       <a class="breadcrumb-item" href="index.php">Accueil</a>
       <a class="breadcrumb-item" href="viewproject.php?project=' . $_GET['project'] . '">Voir projet</a>
-      <a class="breadcrumb-item" href="viewtask.php?list=' . $_GET['idlist'] . '&project=' . $_GET['project'] . '&creator=' . $_GET['creator'] . '">Listes projet</a>
+      <a class="breadcrumb-item" href="viewtask.php?list=' . $_GET['idlist'] . '&project=' . $_GET['project'] . '&creator=' . $_GET['creator'] . '">Voir Tâches</a>
       <span class="breadcrumb-item active">Ajout de tâche</span>
     </nav>';
     echo  "<form class='col-12 text-center' action='addtask.php?idlist=" . $_GET['idlist'] . '&project=' . $_GET['project'] . '&creator=' . $_GET['creator'] . "' method='post'>

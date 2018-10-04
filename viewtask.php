@@ -36,7 +36,7 @@ if ($taskbyproject['id_account'] == $_SESSION['id'] || $_SESSION['admin'] == "1"
   <nav class="breadcrumb">
     <a class="breadcrumb-item" href="index.php">Accueil</a>
     <a class="breadcrumb-item" href="viewproject.php?project=' . $_GET['project'] . '">Voir projet</a>
-    <span class="breadcrumb-item active">' . $taskbylist['list'] . '</span>
+    <span class="breadcrumb-item active">Voir Tâches</span>
   </nav>';
   echo "<div class='col-12 col-md-5 m-0 p-0 mt-5 mx-auto text-center nocolor mb-5'>
     <div class='titleprojectview col-12 m-0 p-0'>
