@@ -41,8 +41,8 @@ if (!empty($_SESSION['pseudo'])) {
 <?php
   if (!empty($_SESSION['pseudo'])) {
     if ($_SESSION['admin'] == 1) {
-      echo "<a href='addadmin.php'><div class='pt-2 pb-0 col-12 text-center admin'>
-      <p>Ajouter un administrateur</p>
+      echo "<a href='panneladmin.php?basic=1'><div class='pt-2 pb-0 col-12 text-center admin'>
+      <p>Pannel administrateur</p>
       </div></a>";
     }
     // check if the id of the session (by connect) is on the bdd
