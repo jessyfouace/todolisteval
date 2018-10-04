@@ -1,10 +1,36 @@
 <?php session_start();
-require('config.php') ?>
+require('config.php');
+// Auto remove project abouth 5 months
+// check if anyone is connected for auto remove projects
+if (!empty($_SESSION['pseudo'])) {
+  // Connect bdd projects
+    $checkdate = $bdd->query('SELECT * FROM projects');
+    $checkdate = $checkdate->fetchAll();
+    foreach ($checkdate as $key => $value) {
+      // Take the date of all projects and transform string to date
+      $dt = new DateTime($value['english_date']);
+      // Set format english
+      $dt->format('Y-m-d');
+      // Add 5 months to projects
+      $dt->modify('+5 months');
+      // Take the actual date
+      $dtnow = new DateTime(date('Y-m-d'));
+      // Set format (security) on english
+      $dtnow->format('Y-m-d');
+      // Take the difference of last date and actual date
+      $interval = $dtnow->diff($dt);
+      if ($dtnow >= $dt) {
+        // Remove project where id = value id
+        $removeproject = $bdd->exec("DELETE FROM projects WHERE id =" . $value['id'] . "");
+      }
+    }
+}
+ ?>
 <!doctype html>
 <html class="no-js" lang="fr">
 
 <head>
-  <title>Accueil</title>
+  <title>Accueil TodoList</title>
   <meta charset="utf-8">
   <meta name="description" content="Site de Todolist gratuit et automatique avec système de compte. Todolist gratuit en ligne">
 <?php require('doctype.php'); ?>
@@ -15,7 +41,7 @@ require('config.php') ?>
 <?php
   if (!empty($_SESSION['pseudo'])) {
     if ($_SESSION['admin'] == 1) {
-      echo "<div class='pt-2 pb-2 col-12 text-center'>
+      echo "<div class='pt-2 pb-2 col-12 text-center admin'>
       <a href='addadmin.php'>Ajouter un administrateur</a>
       </div>";
     }
@@ -27,6 +53,7 @@ require('config.php') ?>
     $account = $account->fetch();
     // if user is connected check the user id and check is he's connected
     if ($account['verif_connect'] == 1) {
+      echo '<p class="colorred text-center pt-2 font-weight-bold">Vos projets seront automatiquement supprimer au bout de 5 mois.</p>';
       echo '<div class="container mx-auto p-0 m-0 pt-2 col-12 text-center">
         <a href="addproject.php"><p class="col-6 mx-auto bgcircle backgroundgreycircle textaddproject">+</p></a>
       </div>
@@ -71,7 +98,7 @@ require('config.php') ?>
               <a class="borderindex col-12 col-md-10 p-0 m-0 backgroundgrey" href="viewproject.php?project=' . $value['id'] . '">
                 <div class="row justify-content-between m-0 p-0 col-12">
                   <div class="nocolor col-8">
-                    <p class="pt-2">' . $value['project_name'] . ' | Créer par: ' . $value['creator_name'] . '</p>
+                    <p class="pt-2">' . $value['project_name'] . ' | Créer par: ' . $value['creator_name'] . ' le ' . $value['create_date_string'] .'</p>
                   </div>
                   <i class="pt-3 borderindex seemore fas fa-arrow-right pl-1 pr-1"> Voir plus</i>
                 </div>
@@ -81,7 +108,7 @@ require('config.php') ?>
       }
     }
   } else {
-      header('location: connect.php');
+      header('location: disconnect.php');
     }
   } else {
     header('location: connect.php');

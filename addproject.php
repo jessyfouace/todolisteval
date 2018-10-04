@@ -26,18 +26,29 @@ if (!empty($_SESSION['id'])) { ?>
 </form>
 
 <?php
+// Check if input is no't empty
   if (!empty($_POST['titleproject']) AND !empty($_POST['descproject']) AND !empty($_POST['deadlineproject'])) {
+    // Create date for now
+    $dateday = date('Y-m-d');
+    // Put the date on string version example: Thuesday 18 October 2018 but in french
+    setlocale(LC_TIME, "fr_FR.iso88591");
+    // Put the string on date time
+    $dateformat = ucfirst(strftime("%A %d %B %G", strtotime($dateday)));
+    // Protect the input by htmlspecialchars and allow guys to add simple cot
     $titleproject = htmlspecialchars(addslashes(strip_tags($_POST['titleproject'])));
     $descproject = htmlspecialchars(addslashes(strip_tags($_POST['descproject'])));
     $deadlineproject = htmlspecialchars(addslashes(strip_tags($_POST['deadlineproject'])));
+    // Check if deadline is a good number 02/10/2018 for example
     if (preg_match("#[0-3]{1}[0-9]{1}+/[0-1]{1}[0-9]{1}+/[0-9]{4}$#", $deadlineproject)) {
-      $addproject = $bdd->prepare("INSERT INTO projects (project_name, project_desc, project_limit, creator_name, id_account) VALUES (:name, :description, :datelimit, :creator, :idaccount)");
+      // Insert in to bdd all we need
+      $addproject = $bdd->prepare("INSERT INTO projects (project_name, project_desc, project_limit, creator_name, id_account, create_date_string, english_date) VALUES (:name, :description, :datelimit, :creator, :idaccount, :create_date, NOW())");
       $addproject->execute(array(
         'name' => $titleproject,
         'description' => $descproject,
         'datelimit' => $deadlineproject,
         'creator' => $_SESSION['pseudo'],
-        'idaccount' => $_SESSION['id']
+        'idaccount' => $_SESSION['id'],
+        'create_date' => $dateformat
       ));
       header('location: index.php');
     } else {

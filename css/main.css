@@ -123,6 +123,10 @@ header{
 /* INDEX */
 /*********/
 
+.admin{
+  border: 1px solid black;
+}
+
 .borderindex{
   border: 1px solid black;
 }
