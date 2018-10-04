@@ -41,7 +41,7 @@ if (!empty($_SESSION['pseudo'])) {
     if ($detailproject['id_account'] == $_SESSION['id'] || $_SESSION['admin'] == "1") {
       echo '<nav class="breadcrumb">
         <a class="breadcrumb-item" href="index.php">Accueil</a>
-        <span class="breadcrumb-item active">' . $detailproject['project_name'] . '</span>
+        <span class="breadcrumb-item active">Voir projet</span>
       </nav>';
       echo "<p class='text-center pt-2'>Nom du projet: " . $detailproject['project_name'] . "</p>
             <p class='text-center'>Description du projet: " . $detailproject['project_desc'] . "</p>
